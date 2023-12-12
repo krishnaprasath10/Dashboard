@@ -8,10 +8,7 @@ from facebook_business.adobjects.adaccount import AdAccount
 from cachelib import SimpleCache
 
 app = Flask(__name__)
-Config = {"apiKey": "AIzaSyCCTeiCYTB_npcWKKxl-Oj0StQLTmaFOaE",
-          "authDomain": "marketing-data-d141d.firebaseapp.com",
-          "databaseURL": "https://marketing-data-d141d-default-rtdb.firebaseio.com/",
-          "storageBucket": "marketing-data-d141d.appspot.com",}
+
 firebase = pyrebase.initialize_app(Config)
 db = firebase.database()
 my_app_id = '622623732603375'
