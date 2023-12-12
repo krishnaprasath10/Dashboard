@@ -1,0 +1,24 @@
+@media screen and (max-width:1000px) {
+    .sidebar {
+        height: 40px;
+        width: 100%;
+    }
+
+    .main-content {
+        margin-top: 100px;
+    }
+
+    .logo {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #menulist{
+        background-color: #000000;
+    }
+    .product-list{
+        background-color: #000000;
+    }
+
+}

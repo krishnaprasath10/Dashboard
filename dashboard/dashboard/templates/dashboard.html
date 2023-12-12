@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../static/dashboard.css"> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+   
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/responsive.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/fonts/all.min.css">
+    <link rel="stylesheet" href="../static/fonts/fontawesome.min.css">
+    <link rel="stylesheet" href="../static/fonts/all.css">
+</head>
+<body style="background-color: black;">
+  <div class="container">
+    <div style = "width:40.6%;padding:20px 0px 72px 0px;position:absolute;top:02%;right:54.3%;border-radius:2%;" class="bordered-box">
+      <h4 style = "color:white">&nbsp;&nbsp;SALES PERFORMANCE</h4>
+      <h6 class="dec">{{curr_month}}</h6>
+          <table style="padding:80%" class="table bordered-box">
+  
+    <thead >
+      <tr style="color: black;">
+        <th style="background-color: black;color:green;" scope="col">%Archived</th>
+        <th style="background-color:black;color:green;" scope="col">Executive</th>
+        <th style="background-color: black;color:green;width:46%;" scope="col">Target Points</th>
+        <th style="background-color: black;color:green;width:45%;" scope="col">Achived Points</th>
+        <th style="background-color: black;color:green;width:50%;" scope="col"> Sales</th>
+        <th style="background-color: black;color:green;" scope="col">Visits</th>
+
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in user_data %}
+
+      <tr>
+        <td style="background-color: black;color:white;">{{ user.percent }}</td>
+        <td style="background-color:#4169E1;;color:white;">{{ user.name }}</td>
+        <td style="background-color: black;color:yellow;">{{ user.target }}</td>
+        <td style="background-color: black;color:yellow;">{{ user.achieved }}</td>
+        <td style="background-color: black;color:white;">{{ user.salescount }}</td>
+        <td style="background-color: black;color:white;">{{ user.visits }}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div style="padding:30px 30px 20px 30px;width:25%;position:absolute;right:29%;top:02%;border-radius:2%;" class="bordered-box">
+  <h4 style="color: white;">ATTENDANCE</h4>
+    <table>
+      <tr>
+        <td rowspan="3"><canvas id="attendanceChart" width="200" height="200" ></canvas></td>
+        <td>&nbsp;Total</td>
+        <td>{{totalstaff}}</td>
+      </tr>
+      <tr>
+        <ul><td><li style="color:green">Present</li></td></ul>
+        <td> {{presentCount}}</td>
+      </tr>
+
+      <tr>
+        <ul><td><li style="color:red">Absentees</li></td></ul>
+        <td>{{absentCount}}</td>
+      </tr>
+
+    </table>
+</div>
+
+<div style="padding:30px 30px 10px 34px;width:25%;height:57.5%;position:absolute;right:3.7%;top:02%;border-radius:2%;" class="bordered-box">
+        <div class="lead-port">
+            <div class="py-2 lead-title">
+                <span class="total-lead-text">TOTAL LEADS</span><br>
+                <span class="lead-number" id="totalflead"></span>
+            </div>
+            <div class="carousel-container2">
+                <table class="table " id="secondTable">
+                    <tbody>
+                        <tr class="second">
+                            <td class="list-call ">
+                                <span class="caller-name col-md-9" id="totalflead"></span>
+                                <span class="caller-count col-md-2" id="totalflead1"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+</div>
+</div>
+</div>
+
+<div class="container">
+  <div style = "width:40.6%;padding:20px 0px 30px 0px;position:absolute;top:60%;right:54.3%;border-radius:2%;" class="bordered-box">
+    <h4 style="color: white;">&nbsp;&nbsp;DAILY REPORT</h4>
+    <table class="table bordered-box">
+  
+    <thead>
+      <tr style="color: black;">
+        <th style="background-color: black;color:green;width:20%;" scope="col">Date</th>
+        <th style="background-color: black;color:green;" scope="col">Leads Generated</th>
+        <th style="background-color: black;color:green;" scope="col">Leads Allocated</th>
+        <th style="background-color: black;color:green;" scope="col">Visits Arranged</th>
+        <th style="background-color: black;color:green;" scope="col">Visited</th>
+        <th style="background-color: black;color:green;" scope="col">Sales</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for day_data in data %}
+
+      <tr>
+        <td style="background-color: black;color:white;">{{ day_data.date }}</td>
+        <td style="background-color: black;color:yellow;">{{ day_data.leads_generated }}</td>
+        <td style="background-color: black;color:white;">{{ day_data.leads_handovered }}</td>
+        <td style="background-color: black;color:white;">{{ day_data.visits_arranged }}</td>
+        <td style="background-color: black;color:white;">{{ day_data.visits_done }}</td>
+        <td style="background-color: black;color:yellow;">{{ day_data.sales }}</td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div style="position:absolute;right:30%;top:40%;display:flex;">
+  <div class="total-clock" style="font-size: 80%;">
+      <div class="tim"><p id="Days" class="numb"></p><p class="semi">:</p></div>
+      <p class="clock-bottom-text">Days</p>
+  </div>
+  <div class="total-clock" style="font-size: 80%;">
+      <div class="tim"><p id="Hours" class="numb"></p><p class="semi">:</p></div>
+      <p class="clock-bottom-text">Hours</p>
+  </div>
+  <div class="total-clock" style="font-size: 80%;">
+      <div class="tim"><p id="Minutes" class="numb"></p><p class="semi">:</p></div>
+      <p class="clock-bottom-text">Minutes</p>
+  </div>
+  <div class="total-clock" style="font-size: 80%;">
+      <div class="tim"><p id="Seconds" class="numb"></p></div>
+      <p class="clock-bottom-text">Seconds</p>
+      
+  </div>
+  <p class="hh" style="position:absolute;right:20%;top:95%;width:60%;">Target Date:<b>January 05<b></p>
+</div>
+
+  
+<div style="padding:30px 30px 150px 30px;width:25%;position:absolute;right:29%;top:60%;border-radius:2%;" class="bordered-box">
+
+    <h4 style="color: white;">WEEK <span id="weekNumber"></span></h4>
+    <h6 class="deadline">Deadline <span id="currentWeek"></span></h6>
+  
+
+<table>
+<tr class="k">
+  <td>💎 </td>
+  <td> Earnings</td>
+  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{achieved1}}</td>
+  <td  rowspan="3" style="position:absolute;right:4%;top:25%"><canvas id="myBiChart" width="180" height="180"></canvas></td>
+  <h3 class="perse">{{percentageround}}%</h3>
+  <br>
+</tr>
+<br>
+
+<tr> 
+  <td><br>🎯</td>
+  <td><br>Target</td>
+  <td><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{target1}}</td>
+  <td></td>
+</tr>
+
+<tr>
+  <td><br>🚀</td>
+  <td><br>Reached</td>
+  <td><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{percentageround}}%</td>
+</tr>
+<tr>
+  <td>
+    <div class="time" style="width:100%;padding:1%;font-size:0.8%;height:20%;position:absolute;right:0%;display:flex;"> 
+      <div class="total-clock">
+          <div class="tim"><p id="Days1" class="numb"></p><p class="semi">:</p></div>
+      </div>
+      <div class="total-clock">
+          <div class="tim"><p id="Hours1" class="numb"></p><p class="semi">:</p></div>
+      </div>
+      <div class="total-clock">
+          <div class="tim"><p id="Minutes1" class="numb"></p><p class="semi">:</p></div>
+      </div>
+      <div class="total-clock">
+          <div class="tim"><p id="Seconds1" class="numb"></p></div>
+      </div>
+</div>
+  </td>
+</tr>
+</table>
+</div>
+
+<div style= "width:25%;position:absolute;right:3.7%;top:60%;padding:30px 30px 50px 30px;border-radius:2%;" class="bordered-box">
+    <h4 style="color: white;">EMPLOYEE OF THE WEEK</h4>
+    
+    <center>
+      {%if employee_of_week_reason == "NONE"%}
+      <div class="no-one">
+      <img src="../static/images/i-dont-know.png" alt="profile-img" class="img-fluid">
+      </div> 
+      {%else%}
+      <div class="employee-img">
+      <img src="{{employee_of_week_profile}}" alt="profile-img" style="border-radius:50%;"  class="img-fluid" width="200" height="200">
+       </div>   
+       {%endif%}
+    <div class="employeename">
+        <h3 style="color:white">{{employee_of_week_name}}</h3>
+        <h5 style = "color:white">{{employee_of_week_reason}}</h5>
+    </div>
+  </center>
+
+</div>
+</div>
+</body>
+</html>
+<style>
+
+</style>
+<script>
+  // script.js
+
+const canvas = document.getElementById('pieChart');
+const ctx = canvas.getContext('2d');
+
+const data = [70, 30,]; // Data for the pie chart (percentages)
+
+const colors = ['#2ecc71','#e74c3c']; // Colors for each segment
+
+const total = data.reduce((acc, value) => acc + value, 0);
+let startAngle = 0;
+
+for (let i = 0; i < data.length; i++) {
+    const sliceAngle = (data[i] / total) * 2 * Math.PI;
+
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, canvas.height / 2);
+    ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 3, startAngle, startAngle + sliceAngle);
+    ctx.fillStyle = colors[i];
+    ctx.fill();
+
+    startAngle += sliceAngle;
+}
+
+</script>
+
+<script>
+var ctxx = document.getElementById('myBiChart').getContext('2d');
+        var myBiChart = new Chart(ctxx, {
+            type: 'doughnut',
+            data: {
+               
+                datasets: [{
+                    data: [70, 30], 
+                    backgroundColor: [
+                        'red',
+                        'green',
+                    ],
+                    borderColor: [
+                        'red',
+                        'green',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                cutout: '80%', 
+            }
+        });
+</script>
+<script src="../static/js/bootstrap.bundle.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/all.min.js"></script>
+<script src="../static/js/fontawesome.min.js"></script>
+<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+<script src="../static/js/main.js"></script>
+<script src="../static/js/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+        function getLastDayOfCurrentWeek() {
+        const currentDate = new Date();
+        const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + (7 - currentDate.getDay()));
+        return lastDay.toLocaleDateString();
+    }
+
+    $(document).ready(function () {
+        const lastDayOfTheWeek = getLastDayOfCurrentWeek();
+        document.getElementById('currentWeek').innerText = lastDayOfTheWeek;
+    });
+    function updateTimer() {
+    const currentTime = new Date();
+    const lastDayOfTheWeek = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate() + (7 - currentTime.getDay()), 23, 59, 59);
+
+    const timeDifference = lastDayOfTheWeek - currentTime;
+
+    if (timeDifference >= 0) {
+        const daysRemaining = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hoursRemaining = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutesRemaining = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const secondsRemaining = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        document.getElementById('Days1').innerText = daysRemaining.toString().padStart(2, '0');
+        document.getElementById('Hours1').innerText = hoursRemaining.toString().padStart(2, '0');
+        document.getElementById('Minutes1').innerText = minutesRemaining.toString().padStart(2, '0');
+        document.getElementById('Seconds1').innerText = secondsRemaining.toString().padStart(2, '0');
+    } else {
+        document.getElementById('Days1').innerText = "00";
+        document.getElementById('Hours1').innerText = "00";
+        document.getElementById('Minutes1').innerText = "00";
+        document.getElementById('Seconds1').innerText = "00";
+    }
+}
+
+$(document).ready(function () {
+    updateTimer();
+    setInterval(updateTimer, 1000);
+});
+        function getNextSundayDate() {
+            const today = new Date();
+            const nextSunday = new Date();
+            nextSunday.setDate(today.getDate() - today.getDay() + 7);
+            nextSunday.setHours(23, 59, 59, 999);
+            return nextSunday;
+        }
+
+        function updateTargetDateTimer() {
+            const targetDate = new Date('2024-01-05T23:59:59');
+            const currentTime = new Date();
+            const timeDifference = targetDate - currentTime;
+
+            if (timeDifference >= 0) {
+                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                document.getElementById('Days').innerText = days.toString().padStart(2, '0');
+                document.getElementById('Hours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('Minutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('Seconds').innerText = seconds.toString().padStart(2, '0');
+            } else {
+                document.getElementById('Days').innerText = "00";
+                document.getElementById('Hours').innerText = "00";
+                document.getElementById('Minutes').innerText = "00";
+                document.getElementById('Seconds').innerText = "00";
+            }
+        }
+
+        $(document).ready(function () {
+            updateTargetDateTimer();
+            setInterval(updateTargetDateTimer, 1000);
+        });
+    
+        function getCurrentWeekNumber() {
+            const currentDate = new Date();
+            const startOfYear = new Date(currentDate.getFullYear(), 0, 1);
+            const days = Math.floor((currentDate - startOfYear) / (24 * 60 * 60 * 1000)) + 1;
+            const weekNumber = Math.ceil(days / 7);
+            return weekNumber;
+        }
+    
+        function displayCurrentWeekNumber() {
+            const weekNumber = getCurrentWeekNumber();
+            document.getElementById('weekNumber').innerText = weekNumber;
+        }
+        $(document).ready(function () {
+            displayCurrentWeekNumber();
+        });
+    
+        var xValues = [];
+        var yValues = [{{ percentage }}, 100 - {{ percentage }}];
+        var barColors = [
+            "#07822C",
+            "#DD170A",
+        ];
+        new Chart("myChart3", {
+            type: "doughnut",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues,
+                    borderColor: 'transparent'
+                }]
+            },
+            options: {
+                cutoutPercentage: 60,
+                title: {
+                    display: true,
+                    text: ""
+                }
+            }
+        });
+        
+        var presentCount = {{ presentCount }};
+        var absentCount = {{ absentCount }};
+        
+        new Chart("attendanceChart", {
+            type: "pie",
+            data: {
+                datasets: [{
+                    backgroundColor: ["#07822C", "#DD170A"],
+                    data: [presentCount, absentCount]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                },
+                legend: {
+                    display: true
+                },
+                maintainAspectRatio: false,
+                responsive: true
+            }
+        });
+
+    $(document).ready(function () {
+        updateState1();
+        setInterval(updateState1, 60000);
+    });
+
+    function updateState1() {
+        $.ajax({
+            url: "/",
+            type: 'GET'
+        })
+        .done(response => {
+            const data = response;
+            var leaddata = {{ leaddata | tojson | safe }};
+            var totaladleads = leaddata.totaladleads;
+            var facebookLeads = leaddata.facebooklead;
+    
+            let tableHTML = "";
+            for (const lead of facebookLeads) {
+                tableHTML += `<tr class="second">
+                                <td class="list-call">
+                                    <span class="caller-name col-md-10">${lead.ad_name}</span>
+                                    <span class="caller-count col-md-2">${lead.lead_count}</span>
+                                </td>
+                            </tr>`;
+            }
+    
+            const secondTable = document.getElementById("secondTable");
+            secondTable.innerHTML = tableHTML;
+    
+            document.getElementById("totalflead").innerHTML = totaladleads;
+            document.getElementById("totalflead1").innerHTML = totaladleads;
+        });
+    }
+</script>
+<script>
+         function checkInternetAndRefresh() {
+                if (navigator.onLine) {
+                    location.reload();
+                }
+            }
+            setInterval(checkInternetAndRefresh, 500000);
+    
+            function sortTableByAchieved() {
+        const $tableBody = $('.carousel-container table tbody');
+        const rows = $tableBody.find('tr').get();
+    
+        rows.sort((a, b) => {
+            const valA = parseFloat($(a).find('td').eq(3).text());
+            const valB = parseFloat($(b).find('td').eq(3).text());
+            return valB - valA;
+        });
+    
+        $.each(rows, (index, row) => {
+            $tableBody.append(row);
+            $(row).find('.profile-img-sec img').attr('src', index < 3 ? '../static/images/crowns.png' : '../static/images/lazy.png');
+        });
+    }
+    
+    $(document).ready(function () {
+        sortTableByAchieved();
+    });
+</script>  

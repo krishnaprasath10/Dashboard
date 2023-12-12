@@ -1,0 +1,119 @@
+
+#tab{
+    width:40%;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    width: 90%;
+    margin-right: calc(100%-200px);
+}
+td{
+    color:white;
+
+}
+tr {
+    color:#f8f9fa;
+    text-align: center;
+}
+body {
+    background-color: #f8f9fa; /* Set your desired background color */
+}
+
+.container {
+    margin-top: 20px; /* Adjust the top margin as needed */
+}
+
+.table {
+    background-color: #fff; /* Set the background color of the tables */
+}
+
+h4 {
+    margin-bottom: 10px; /* Add some bottom margin to the heading for spacing */
+}
+
+.bordered-box {
+    border: 1px solid #ccc; /* Add border to the specific div */
+    padding: 10px; /* Add padding for spacing */
+    margin-bottom: 20px; /* Add some bottom margin to the specific div */
+}
+.rounded-img{
+    width:130px;
+    border-radius:50%;
+    height: 120px;
+    text-align:center;
+    position: absolute;
+    right:34%;
+    top:25%;
+
+}
+.perse{
+    position: absolute;
+    color:white;
+    right:20%;
+    top:44%;
+    
+}
+.eow{
+    position: absolute;
+    right: 20%;
+    top:60%;
+
+}
+
+.leads{
+   color:white;
+   text-align:left;
+   background-color:#4169E1;
+   width:90%;
+   position: absolute;
+   top:40%;
+   padding:3px
+   
+}
+.lea{
+    color:white;
+    position: absolute;
+    right:10%;
+    top:40.5%;
+    background-color: #1e3c99;
+    width: 9%;
+    text-align: center;
+
+}
+.deadline{
+
+    color:white;
+    position: absolute;
+    right:5%;
+    top:8%;
+}
+.dec{
+    color:white;
+    position: absolute;
+    top:5%;
+    right:4%;
+    border: solid;
+    border-width: 1px;
+}
+#l{
+    color:white;
+    background-color:#4169E1;
+    width:30%;
+    text-align: center;
+    position: absolute;
+    right: 37%;
+    top:20%;
+    border-radius: 5%;
+}
+.time{
+    color:white;
+    background-color: #4169E1;
+    width:40%;
+    text-align: center;
+    position: absolute;
+    right:30%;
+    top:80%;
+    border-radius: 5%;
+}
